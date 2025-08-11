@@ -1,23 +1,25 @@
+#include <iostream>
+#include <assert.h>
+#include <string>
 #include "ColorData.h"
 #include "ColorCodingManual.h"
+#include "ColorCoderTests.h"
 
-namespace TelCoColorCoder 
+void TestColorMapper() 
 {
-    TEST(ColorCoderTest, TestColorMapper) 
-    {
-        ColorPair colorPair = GetColorFromPairNumber(4);
-        EXPECT_EQ(colorPair.getMajor(), WHITE);
-        EXPECT_EQ(colorPair.getMinor(), BROWN);
-        
-        EXPECT_EQ(GetPairNumberFromColor(BLACK, ORANGE), 12);
-    }
+    TelCoColorCoder::ColorPair colorPair = TelCoColorCoder::GetColorFromPairNumber(4);
+    assert(colorPair.getMajor() == TelCoColorCoder::WHITE);
+    assert(colorPair.getMinor() == TelCoColorCoder::BROWN);
+    
+    assert(TelCoColorCoder::GetPairNumberFromColor(TelCoColorCoder::BLACK, TelCoColorCoder::ORANGE) == 12);
+    std::cout << "✓ Color mapper tests passed\n";
+}
 
-    TEST(ColorCoderTest, TestReferenceManual) 
-    {
-        std::string manual = GenerateReferenceManual();
-        EXPECT_TRUE(manual.find("| Pair | Major Color | Minor Color |") != std::string::npos);
-        EXPECT_TRUE(manual.find("White") != std::string::npos);
-        EXPECT_TRUE(manual.find("Violet") != std::string::npos);
-    }
-
+void TestColorCodingManual() 
+{
+    std::string manual = TelCoColorCoder::FormatColorCodingManual();
+    assert(manual.find("Pair Number | Major Color | Minor Color") != std::string::npos);
+    assert(manual.find("White") != std::string::npos);
+    assert(manual.find("Violet") != std::string::npos);
+    std::cout << "✓ Reference manual tests passed\n";
 }
