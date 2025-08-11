@@ -1,4 +1,3 @@
-#include <gtest/gtest.h>
 #include "ColorData.h"
 #include "ColorCodingManual.h"
 
@@ -20,4 +19,5 @@ namespace TelCoColorCoder
         EXPECT_TRUE(manual.find("White") != std::string::npos);
         EXPECT_TRUE(manual.find("Violet") != std::string::npos);
     }
+
 }
